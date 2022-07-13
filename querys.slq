@@ -1,0 +1,65 @@
+---------------------------------------SEÇÃO 24: MÓDULO SQL SERVER - ELEVANDO O NÍVEL --------------------
+
+-- Evitando Redudância você evita que seu HD cresça 
+-- Consequência de ter um banco relacional são os JOINS que são necessarios fazer, que faz com que o processamento do banco suba lá em cima e o desempenho caía para baixo!
+
+
+
+
+----------------------SEÇÃO 24: MÓDULO SQL SERVER - ELEVANDO O NÍVEL -----------------
+---------------------------------93. Criando uma conta na Microsoft e baixando  o SQL Server 2014----------------------
+---------------------------------94. Instalando o SQL Server 2014 e seus pré-requisitos--------------------------------
+---------------------------------95. O Client do SQL Server e seus Bancos de Sistema-----------------------------------
+
+-- Segue algumas novidade usando o SQLSERVER 
+-- Fazendo multiplos comentarios em SQLSERVER  /**/
+
+CREATE DATABASE AULA_SQL
+CREATE DATABASE AULA_SQL02
+
+-- Não é necessario usar ponto e virgula no final do comando/query
+
+-- O SQLserver tem algo chamado processamento ASSÍNCRONO, ou seja sem ordem !
+/*
+GO é o delimitador do SQLServer. 
+
+Para que eu utilizo o GO?
+Resposta:  Para executar por parte , que será uma forma mais segura e certa , fazendo com que a prioridade seja escolhida vamos dizer ! 
+	Quebrar os comandos do SQLServer em pacotes TCP IP para que chegue na ordem sicrona no servidor !
+*/
+
+/*
+	Existe um recursos chamado no SQLServer de:              , dentro do banco que ele já te aponta se tem alguma coisa errada no seu comando !   
+*/
+
+CREATE DATABASE BANCO04
+GO
+
+USE BANCO04
+GO
+
+CREATE TABLE TESTE(
+	NOME VARCHAR(30)
+)
+GO
+
+--------------------------------------------------SEÇÃO 25: ARQUITETURA DO SQL SERVER ----------
+
+CREATE TABLE TB_EMPRESA(
+	ID INT,
+    NOME VARCHAR(50)
+)
+GO
+
+------------------------------------99. Constraints Nomeadas, Identity, SP_COLUMNS e SP_HELP------------------------------------------
+
+-- CONECTANDO A UM BANCO
+
+USE EMPRESA
+GO
+
+-- CRIANDO TABELAS
+
+CREATE TABLE ALUNO(
+	IDALUNO INT PRIMARY
+)
