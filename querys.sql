@@ -205,3 +205,180 @@ INNER JOIN ENDERECO E
 ON A.IDALUNO = E.ID_ALUNO
 GO 
 
+/*USANDO LEFT JOIN*/
+SELECT A.NOME,T.TIPO,T.NUMERO,E.BAIRRO,E.UF 
+FROM ALUNO A
+LEFT JOIN TELEFONE T 
+ON A.IDALUNO = T.ID_ALUNO
+INNER JOIN ENDERECO E 
+ON A.IDALUNO = E.ID_ALUNO
+GO 
+
+
+
+/*IF NULL EM SQLSERVER -> Se o campo for vazio*/
+SELECT A.NOME,
+       ISNULL(T.TIPO, 'SEM') AS "TIPO",
+       ISNULL(T.NUMERO,'NUMERO') AS "TELEFONE",
+       E.BAIRRO,
+       E.UF 
+FROM ALUNO A LEFT JOIN TELEFONE T 
+ON A.IDALUNO = T.ID_ALUNO
+INNER JOIN ENDERECI E 
+ON A.IDALUNO = E.ID_ALUNO
+GO
+
+
+---------------------------------------------101. Trabalhando com Datas--------------------------------------
+
+-- DATAS 
+
+SELECT * FROM ALUNO
+GO
+
+SELECT NOME,NASCIMENTO
+FROM ALUNO
+GO
+
+-- DATEDIFF - CALCULA A DIFERENÇA ENTRE 2 DATAS 
+SELECT NOME, GETDATE() FROM ALUNO
+GO
+
+-- GETDATE() -> TRÁS O DIA E HORA
+ 
+ SELECT NOME, DATEDIFF(DAY,NASCIMENTO,GETDATE()) AS "IDADE"
+ FROM ALUNO
+ GO
+
+--OU
+
+ SELECT NOME, DATEDIFF(DAY,NASCIMENTO,GETDATE()) AS IDADE
+ FROM ALUNO
+ GO
+
+SELECT NOME, DATEDIFF(DAY,NASCIMENTO,GETDATE()) IDADE
+FROM ALUNO
+GO
+
+/*3 PASSO - RETORNO EM INTEIRO + OPER MATEMATICA*/
+SELECT NOME, (DATEDIFF(DAY,NASCIMENTO,GETDATE())/365) AS "IDADE"
+FROM ALUNO
+GO
+ 
+-- Usando a função MONTH, Nesse Query estamos descubrindo o quantos meses tem cada aluno
+SELECT NOME, (DATEDIFF(MONTH,DAY,NASCIMENTO,GETDATE())/12) AS "IDADE"
+FROM ALUNO
+GO
+-----------------------------------------OU
+-- Usando a função YEAR, Nesse Query estamos descubrindo o quantos meses tem cada aluno
+SELECT NOME, DATEDIFF(YEAR,NASCIMENTO,GETDATE()) AS "IDADE"
+FROM ALUNO
+GO
+
+/*DATANAME - TRAZ O NOME DA PARTE DA DATA EM QUESTAO             -> Funções de DATA, lembrando que ele traz em STRING*/
+
+--Irá me trazer o dia da semana
+SELECT NOME,DATENAME(WEEKDAY,NASCIMENTO)
+FROM ALUNO
+GO
+-- Irá me trazer o mês
+SELECT NOME,DATENAME(MONTH,NASCIMENTO)
+FROM ALUNO
+GO
+-- Irá me trazer o ano
+SELECT NOME,DATENAME(YEAR,NASCIMENTO)                   
+FROM ALUNO
+GO
+
+
+/*DATEPART - Mesma coisa DATANAME porém seu retorno é inteiro INT, podendo fazer conta*/
+SELECT NOME, DATEPART(MONTH,NASCIMENTO), DATENAME(MONTH,NASCIMENTO) 
+FROM ALUNO
+GO
+
+/*DATEADD -  RETORNA UMA DATA SOMANDO A OUTRA DATA*/
+SELECT DATEADD(DAY,365,GETDATE())
+
+SELECT DATEADD(YEAR,10,GETDATE())
+
+-- COMO FUNCIONA ENTEDENDO
+/*
+SELECT DATEADD(INTERVALO,INCREMENT_INT,EXPESSION)
+SELECT DATEADD(DIA_ANO_MÊS,QUANTO,GETDATE())
+SELECT DATEADD(OQUE,QUANTO,GETDATE())
+
+*/
+
+---------------------------------------102. Conversões de tipos de dados--------------------------
+SELECT 1 + '1'
+GO ---------Retornou: 2
+
+SELECT '1' + '1'
+GO ---------Retornou: 11
+
+SELECT 'Curso de banco de dados' + '1'
+GO ----------Retonou: Curso de banco de dados1
+
+
+SELECT 'CURSO DE BANCO DE DADOS' + 1
+GO --------Retornou: Deu um erro ao converter o varchar valor 'CURSO DE BANCO DE DADOS' para o tipo de dados int
+
+
+--------FUNÇÕES DE CONVERSAO DE DADOS
+-- Esse Cast é uma função para converte dados ou seja converter tipos 
+SELECT CAST('1' AS INT) + CAST('1' AS INT)
+GO
+
+-- STRING + STRING = CONCATENAÇÃO
+-- NUMERO + NUMERO = SOMA DOS NUMEROS
+
+-------------------MANUAL PARA CONVERSORES----------------
+-- https://docs.microsoft.com/pt-br/sql/t-sql/data-types/data-type-conversion-database-engine?view=sql-server-ver16
+
+
+/*CONVERSAO E CONCATENAÇÃO*/
+SELECT NOME,
+NASCIMENTO
+FROM ALUNO
+GO
+
+SELECT NOME,
+DAY(NASCIMENTO)
+FROM ALUNO
+
+-- Ocorrerá um erro , pois na hora da conversão ele está barrando na hora da barra, pois MONTH,DAY e YEAR está como inteiro mas as barras estão como String
+SELECT NOME,
+MONTH(NASCIMENTO) + '/' + MONTH(NASCIMENTO) + '/' + YEAR(NASCIMENTO)
+FROM ALUNO
+
+
+-- Resolvendo esse erro, solução abaixo : 
+SELECT NOME,
+CAST(DAY(NASCIMENTO) AS VARCHAR) + '/' +
+CAST(MONTH(NASCIMENTO) AS VARCHAR) + '/' +
+CAST(YEAR(NASCIMENTO)  AS VARCHAR) + '/'
+FROM ALUNO
+GO
+ 
+
+-------------------------103. Correção do Exercício proposto--------------------------------
+SELECT NOME,
+CAST(DAY(NASCIMENTO) AS VARCHAR) + '/' +
+CAST(MONTH(NASCIMENTO) AS VARCHAR) + '/' +
+CAST(YEAR(NASCIMENTO)  AS VARCHAR) AS "NASCIMENTO"
+FROM ALUNO
+GO
+ 
+
+------------------------------------------------104. A função CHARINDEX
+-- O que essa função CHARINDEX?
+-- Reposta: Retorma um inteiro
+-- CONTAGEM DEFAULT - INICIA EM 01
+
+
+SELECT NOME, CHARINDEX(OQUE,ONDE,A_PARTIR_DE)
+
+SELECT NOME,CHARINDEX('A',NOME) AS INDICE FROM ALUNO
+GO
+
+-- Explicando como funciona a
