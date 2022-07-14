@@ -1,3 +1,4 @@
+----------------------- SEÇÃO 23: E O BUSINESS INTELLIGENCE? --------------------
 ---------------------------------------SEÇÃO 24: MÓDULO SQL SERVER - ELEVANDO O NÍVEL --------------------
 
 -- Evitando Redudância você evita que seu HD cresça 
@@ -16,6 +17,54 @@
 
 CREATE DATABASE AULA_SQL
 CREATE DATABASE AULA_SQL02
+
+-- Não é necessario usar ponto e virgula no final do comando/query
+
+-- O SQLserver tem algo chamado processamento ASSÍNCRONO, ou seja sem ordem !
+/*
+GO é o delimitador do SQLServer. 
+
+Para que eu utilizo o GO?
+Resposta:  Para executar por parte , que será uma forma mais segura e certa , fazendo com que a prioridade seja escolhida vamos dizer ! 
+	Quebrar os comandos do SQLServer em pacotes TCP IP para que chegue na ordem sicrona no servidor !
+*/
+
+/*
+	Existe um recursos chamado no SQLServer de:              , dentro do banco que ele já te aponta se tem alguma coisa errada no seu comando !   
+*/
+
+CREATE DATABASE BANCO04
+GO
+
+USE BANCO04
+GO
+
+CREATE TABLE TESTE(
+	NOME VARCHAR(30)
+)
+GO
+
+--------------------------------------------------SEÇÃO 25: ARQUITETURA DO SQL SERVER ----------
+----------------------------------97. Arquivos LDF e MDF--------------------------------
+
+
+/*O que é uma arquitetura? 
+Resposta: É como  se comporta os arquivos que compoe o Banco de dados 
+*/
+ 
+
+ /*
+ 
+ MFD -> MASTER DATA FILE -> Armazena DADOS
+ LDF -> LOG DATA FILE -> Armazena LOGS
+ 
+ */
+
+
+---------------------------------------SEÇÃO 24: MÓDULO SQL SERVER - ELEVANDO O NÍVEL --------------------
+
+-- Evitando Redudância você evita que seu HD cresça 
+-- Consequência de ter um banco relacional são os JOINS que são necessarios fazer, que faz com que o processamento do banco suba lá em cima e o desempenho caía para baixo!
 
 -- Não é necessario usar ponto e virgula no final do comando/query
 
