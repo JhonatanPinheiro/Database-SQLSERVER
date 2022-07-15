@@ -381,4 +381,55 @@ SELECT NOME, CHARINDEX(OQUE,ONDE,A_PARTIR_DE)
 SELECT NOME,CHARINDEX('A',NOME) AS INDICE FROM ALUNO
 GO
 
--- Explicando como funciona a
+-- Explicando como funciona essa função: Elá é alimentado por dois parâmetros. 1- Primeiro seria Oque eu quero, 2- Nome_Atributo
+
+SELECT NOME,CHARINDEX('A',NOME,2) AS INDICE 
+FROM ALUNO
+GO
+
+
+
+-------------------------------105. Utilizando Bulk Insert - Desafio utilizando CHARINDEX-----------------------------
+-- BULK INSERT IMPORTAÇÃO DE ARQUIVOS
+CREATE TABLE LANCAMENTO_CONTABIL(
+    CONT INT,
+    VALOR INT,
+    DEB_CRED CHAR(1)
+)
+GO
+
+-- Explicando como funciona
+BULK INSERT LANCAMENTO_CONTABIL  --Informa o nome da tabela que deseja alimentar
+FROM 'C:\ARQUIVOS\CONTAS.TXT' -- Informa o caminho
+WITH(
+-- São 3 paramêtros a serem preenchidos
+    FIRSTROW = 2,     -- Informa de apartir de qual linha do arquivo irá começar a considerar para alimentar
+    DATAFILETYPE = 'char', -- Precisa informa qual tipo seria esse arquivo que irei importe (INT,CHAR,DOUBLE)
+    FIELDTERMINATOR = ';', -- Precisa colocar como os campos termina. Nesse caso seria ';' , pois todas as linha estão com o ponto de virgula informando seja o final . Ou seja o delimitador dele .
+    ROWTERMINATOR = '\n' -- esse parâmetro é fixo, ele significar o ASC do teclado . Tipos de configurações do teclado
+
+)
+
+
+--Comando pronto para executar ! 
+BULK INSERT LANCAMENTO_CONTABIL
+FROM 'C:\ARQUIVOS\CONTAS.TXT'
+WITH(
+
+    FIRSTROW = 2,
+    DATAFILETYPE = 'char',
+    FIELDTERMINATOR = '\t',
+    ROWTERMINATOR = '\n'
+
+)
+
+
+SELECT * FROM LANCAMENTO_CONTABIL
+
+DELETE FROM LANCAMENTO_CONTABIL
+
+/*DESAFIO DO SALDO*/
+-- 1 Preciso de uma Query que traga o número da conta saldo - Devedor e Credor
+
+
+
