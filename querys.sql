@@ -438,6 +438,9 @@ GO
 
 
 -------------------------------------106. Correção do desafio - Exibindo o Saldo-------------------
+
+/*  NUMEROS - COMO EU ALTERO UM NÚMERO PARA NEGATIVO SEM MODIFICA-LO?   5 = 5 -> 5x(-1) = -5 */
+
 SELECT CONTA,VALOR,DEB_CRED,
 CHARINDEX('D', DEB_CRED) AS DEBITO,
 CHARINDEX('C',DEB_CRED) AS CREDITO,
