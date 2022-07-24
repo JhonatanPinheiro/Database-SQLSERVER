@@ -1,2 +1,3 @@
 # Database-SQLSERVER
  
+ - Querys, Views, Procedures, Others ...
