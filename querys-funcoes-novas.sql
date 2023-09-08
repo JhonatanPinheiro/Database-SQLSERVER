@@ -66,6 +66,41 @@ WHERE c.customer_id = ANY(
 );
 
 
+-- 62. Funções com Strings (TRIM, LTRIM , RTRIM,LENGTH, LOCATE, REPEAT,RIGHT, LEFT )
+SELECT TRIM('          Carros         '); -- Remove os espaços da esquerda e direita
+
+SELECT LTRIM('          Carros'); -- Remove os espaços somente da esquerda
+
+SELECT RTRIM('Carros         '); -- Remove os espaços somente da direita
+
+-- Cuidado ao Usar essa função para remover algum caracter, pois ao utilizar deve-se entender muito bem como ele  funciona, pois como será mostrado abaixo pode reparar que dependendo da forma que utilizamos ele, ele removerá o caracter tanto no início como no final OU até mesmo só no inicio como só no final
+# TRIM com BOTH
+
+SELECT  TRIM(BOTH 'a' FROM  'aaaaaaaaaaCarros'); -- Irá remover todas os 'a' (Lower) que estão començando e mostará apenas 'Carros'
+
+SELECT  TRIM(BOTH 'a' FROM  'aaaaaaaaaaCarrosaaaaaaaaaa'); -- Irá remover todas os 'a' (Lower) que estão començando e no final da palavras, monstrando apenas a palavra 'Carros'
+
+SELECT  TRIM(BOTH 'aaaaaaaaa' FROM  'aaaaaaaaaaCarros'); -- Irá remover apenas os 9  'a' (Lower) que estão començando e mostará apenas 'a' 'aCarros'
+
+SELECT  TRIM(BOTH 'aaaaaaaaaaaaC' FROM  'aaaaaaaaaaaaCarros') -- Irá remover todos os 'a' (Lower) que estão començando e mostará apenas 'arros';
 
 
+# TRIM com LEADING
+SELECT  TRIM(LEADING 'a' FROM  'aaaaaaaaaaCarrosaaaaaaaaaaaaaaaaaaa'); -- Irá remover todas os 'a' (Lower) que estão començando/inicio e mostará apenas 'Carrosaaaaaaaaaaaaaaaaaaa'
 
+SELECT  TRIM(TRAILING 'a' FROM  'aaaaaaaaaaCarrosaaaaaaaaaaaaaaaaaaa'); -- Irá remover todas os 'a' (Lower) que estão terminando/fim e mostará apenas 'aaaaaaaaaaCarros'
+
+
+#Usando a função LOCATE 
+SELECT LOCATE('o','Jhonatan P'); -- Informa qual posição encontra-se a letra 'o'. Deve lembrar que quando temos mais de uma letra repetida ele mostrará a posição apenas de primeira letra equivalente. Deve-se manter atento também pois essa função ela não fazer a distinguinção de UPPER e LOWER, ela mostrará apenas a posição da letra mesmo sendo Maiúsculo ou MIN
+
+#Usando LENGTH
+SELECT LENGTH('Jhonatan'); -- Mostrará o tamanho da String (Quantidades de caracteres que possui a palavra "Jhonatan") -> Começa a contagem do 1
+
+#Usando REPEAT
+SELECT REPEAT('Jhonatan',10); -- Mostrará o nome 10 vezes "JhonatanJhonatanJhonatanJhonatanJhonatanJhonatanJhonatanJhonatanJhonatanJhonatan"
+
+#Usando RIGHT
+SELECT RIGHT('Carros',4); -- Mostrará apenas as 4 últimos caracteres "rros"
+
+SELECT LEFT('Carros',4); -- Mostrará apenas as 4 primeiros caracteres "Carr"
