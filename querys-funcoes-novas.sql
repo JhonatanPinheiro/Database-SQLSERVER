@@ -27,3 +27,45 @@ WHERE act.first_name REGEXP '[aeiou]dy'; -- Irá pegar todos que SOMENTE TENHA A
 --  LINK acima para melhor entendimento e mais informações do uso do LIKE e REGEXP
 
 
+-- 59. Utilizando o ANY
+
+-- Primeira maneira
+SELECT pa.customer_id,pa.amount, COUNT(*)
+FROM payment pa
+GROUP BY pa.customer_id 
+HAVING COUNT(*) > 35;
+
+-- Segunda maneira
+SELECT pa.customer_id,pa.amount, COUNT(*) AS Compras_realizadas
+FROM payment pa
+GROUP BY pa.customer_id 
+HAVING  Compras_realizadas > 35;
+
+-- Pegando todos os clientes que fizeram acima de 15 compras (tabela: payment) e monstrando todas as informações da tabela customer (nome, sobrenome, etc...) - Utilizando o IN #Dentro-Contido
+SELECT * 
+FROM customer c 
+WHERE c.customer_id IN(
+	
+	SELECT pa.customer_id
+	FROM payment pa
+	GROUP BY pa.customer_id 
+	HAVING COUNT(*) > 35
+
+);
+
+-- Pegando todos os clientes que fizeram acima de 15 compras (tabela: payment) e monstrando todas as informações da tabela customer (nome, sobrenome, etc...) - Utilizando o ANY #Qualquer Um
+SELECT * 
+FROM customer c 
+WHERE c.customer_id = ANY(
+	
+	SELECT pa.customer_id
+	FROM payment pa
+	GROUP BY pa.customer_id 
+	HAVING COUNT(*) > 35
+
+);
+
+
+
+
+
